@@ -50,8 +50,9 @@ def gui():
 				new_score+=1
 				computer_score.set(new_score)
 
-	rps_window=Toplevel()
-	rps_window.title("Rock, Paper, Scissors")
+	#Using tkdocs to help!
+	root=Tk()
+	root.title("Rock, Paper, Scissors")
 
 	player_choice=IntVar()
 	computer_choice=StringVar()
@@ -60,7 +61,7 @@ def gui():
 	player_score=IntVar()
 	computer_score=IntVar()
 
-	rps_frame=Frame(rps_window,padding='3 3 12 12', width=300)
+	rps_frame=Frame(root,padding='3 3 12 12', width=300)
 	rps_frame.grid(column=0,row=0,sticky=(N,W,E,S))
 	rps_frame.columnconfigure(0,weight=1)
 	rps_frame.rowconfigure(0,weight=1)
@@ -85,4 +86,4 @@ def gui():
 
 
 if __name__=='__main__':
-		gui()
+	gui()
