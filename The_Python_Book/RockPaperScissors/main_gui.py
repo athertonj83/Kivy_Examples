@@ -6,7 +6,6 @@ from tkinter.ttk import *
 import random
 import rps_gui_python3
 
-
 main=Tk()
 main.title("Jen's games")
 
