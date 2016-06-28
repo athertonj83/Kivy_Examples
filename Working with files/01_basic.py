@@ -1,4 +1,5 @@
 # working with files
+from shutil import copyfile
 import os
 
 #1 Created a csv (test.csv) with personal fields in
@@ -40,3 +41,6 @@ else:
 os.chdir(full_path)
 os.chdir("test_dir")
 print("Going into new_test folder: ",full_path,"test_dir",sep="")
+
+# copy test.csv into here;
+copyfile("C:/Users/Jen/Documents/GitHub Repositories/Personal Stuff June 2016/Working with files/test.csv","C:/Users/Jen/Documents/GitHub Repositories/Personal Stuff June 2016/Working with files/test_dir/test.csv")
