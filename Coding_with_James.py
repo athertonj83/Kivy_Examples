@@ -6,7 +6,7 @@
 # Dictionary of associations
 assoc={3:"Fizz", 5:"Buzz", 7:"Woof"}
 
-for i in range(20):
+for i in range(26):
 	word=""
 	if i%3==0:
 		word="Fizz"
