@@ -1,6 +1,6 @@
 # advanced timer for my interval training app
 import time
-import winsound
+#import winsound
 
 #60*int(warmUpMins)
 #60*intervalMins
@@ -10,19 +10,20 @@ import winsound
 
 # warmup start of mins*60 for number of seconds
 def warmup(warmUpSecs):
-    t0 = time.clock()
+    t0 = time.time()
     time.sleep(int(warmUpSecs))
     print("End of warm up!")
-    print(time.clock() - t0, "time elapsed")
-    winsound.Beep(2500,500)
+    print(time.time() - t0, "time elapsed")
+    #winsound.Beep(2500,500) - this is for windows
+    #print(chr(7))
 
 #intervals
 def intervalTime(numIntervals,intervalSecs):
     for i in range(int(numIntervals)):
-        t0 = time.clock()
+        t0 = time.time()
         time.sleep(int(intervalSecs))
         print("End of interval",i+1)
-        print(time.clock() - t0, "time elapsed")
+        print(time.time() - t0, "time elapsed")
 
 
 
