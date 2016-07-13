@@ -32,7 +32,7 @@ def runIntervals(numIntervals,fastIntervalSecs,slowIntervalSecs):
 #input from user
 def userInput():
     x=input("Warm up seconds: ")
-    y=input("Number of fast/slow intervals: ")
+    y=input("Number of intervals: ")
     z=input("Length of fast interval: ")
     a=input("Length of slow interval: ")
     b=input("Length of cool down: ")
