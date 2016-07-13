@@ -9,36 +9,41 @@ import time
 
 
 # warmup start of mins*60 for number of seconds
-def warmup(warmUpSecs):
+def warmupdown(timeLength, msg):
+    print(msg)
     t0 = time.time()
-    time.sleep(int(warmUpSecs))
-    print("End of warm up!")
-    print(time.time() - t0, "time elapsed")
+    time.sleep(int(timeLength))
     #winsound.Beep(2500,500) - this is for windows
-    #print(chr(7))
+    #print("\a")
+    #Beep
 
 #intervals
-def intervalTime(numIntervals,intervalSecs):
+def runIntervals(numIntervals,fastIntervalSecs,slowIntervalSecs):
     for i in range(int(numIntervals)):
+        print("Fast interval - START")
         t0 = time.time()
-        time.sleep(int(intervalSecs))
-        print("End of interval",i+1)
-        print(time.time() - t0, "time elapsed")
+        time.sleep(int(fastIntervalSecs))
 
-
+        print("Slow interval - START")
+        t0 = time.time()
+        time.sleep(int(slowIntervalSecs))
 
 
 #input from user
 def userInput():
-    x=input("Enter number of warm up seconds: ")
-    y=input("Enter number of intervals: ")
-    z=input("Enter length of each interval: ")
+    x=input("Warm up seconds: ")
+    y=input("Number of fast/slow intervals: ")
+    z=input("Length of fast interval: ")
+    a=input("Length of slow interval: ")
+    b=input("Length of cool down: ")
 
-    print("You have chosen a warmup of",x,"seconds, and",y,"intervals, of",z, "seconds each.")
+    print("\n\nWarmup:",x,"seconds\nNumber of intervals:",y,"\nFast Intervals:",z,"seconds\nSlow Intervals:",a,"seconds\nCool down:",b,"seconds")
     jen_continue=input("Y/N?")
     if jen_continue.upper()=="Y":
-        warmup(x)
-        intervalTime(y,z)
+        warmupdown(x,"Warm up - START")
+        runIntervals(y,z,a)
+        warmupdown(b,"Cool down - START")
+        print("End")
 
 if __name__=="__main__":
     userInput()
