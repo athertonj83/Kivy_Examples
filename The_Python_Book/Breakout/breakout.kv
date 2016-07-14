@@ -1,5 +1,14 @@
 #breakout kivy filename
 
+<Game>:
+    ball: the_ball
+    player: the_player
+    Ball:
+        id: the_ball
+    Player:
+        id: the_player
+
+
 <Player>:
     size_hint: 0.09, 0.05
     pos_hint: {'x':self.position, 'y':0.1}
@@ -12,7 +21,7 @@
 
 <Ball>:
     pos_hint: {'x':self.pos_hint_x, 'y':self.pos_hint_y}
-    size_hint: None, none
+    size_hint: (None,None)
     proper_size: min(0.03*self.parent.height, 0.03*self.parent.width)
     size: self.proper_size, self.proper_size
     canvas:
@@ -24,14 +33,33 @@
 
 <Block>:
     size_hint: 0.09, 0.05
+    #pos_hint:{'x':2,'y':2}
     canvas:
         Color:
             rgb:self.colour
         Rectangle:
             pos:self.pos
+            #pos:self.center
             size:self.size
         Color:
             rgb:0.1,0.1,0.1 # colour of the lines
         Line:
             rectangle:
                 [self.x,self.y,self.width,self.height]
+
+<GameEndPopup>:
+    size_hint: 0.8,0.8
+    auto_dismiss: False
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: root.message
+            font_size: 60
+            markup: True
+            halign: 'center'
+        Button:
+            size_hint_y: None
+            height: sp(80)
+            text: 'Play again?'
+            font_size: 60
+            on_release: root.game.start(); root.dismiss()
