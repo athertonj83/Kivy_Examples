@@ -1,6 +1,8 @@
 #breakout kivy filename
 
 <Player>:
+    size_hint: 0.09, 0.05
+    pos_hint: {'x':self.position, 'y':0.1}
     canvas:
         Color:
             rgba:1,1,1,1
@@ -9,6 +11,10 @@
             size:self.size
 
 <Ball>:
+    pos_hint: {'x':self.pos_hint_x, 'y':self.pos_hint_y}
+    size_hint: None, none
+    proper_size: min(0.03*self.parent.height, 0.03*self.parent.width)
+    size: self.proper_size, self.proper_size
     canvas:
         Color:
             rgb:1,0.55,0
@@ -17,14 +23,15 @@
             size:self.size
 
 <Block>:
+    size_hint: 0.09, 0.05
     canvas:
         Color:
-            rgb: self.colour
+            rgb:self.colour
         Rectangle:
             pos:self.pos
             size:self.size
         Color:
-            rgb:0.1,0.1,0.1
+            rgb:0.1,0.1,0.1 # colour of the lines
         Line:
             rectangle:
                 [self.x,self.y,self.width,self.height]
