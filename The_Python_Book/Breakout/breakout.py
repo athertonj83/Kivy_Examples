@@ -110,9 +110,9 @@ class Game(FloatLayout):
         self.player.position=0.5
 
     def destroy_blocks(self,ball):
-        #GameEndPopup(message='[color=#00ff00]Does this work![/color]',game=self).open()
         for i, block in enumerate(self.blocks):
-            if ball.collide_widget(block):
+            if ball.collide_widget(Block):
+                print("TEST")
                 y_overlap=(ball.top - block.y if ball.velocity[1]>0 else block.top - ball.y)/block.size_hint_y
                 x_overlap=(ball.right - block.x if ball.velocity[0]>0 else block.right - ball.x)/block.size_hint_x
                 if x_overlap<y_overlap:
