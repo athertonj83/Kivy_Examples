@@ -19,39 +19,39 @@ class Player(Widget): #the moving paddle
     position=NumericProperty(0.5)
     direction=StringProperty('none')
 
-    def __init__(self,**kwargs):
-        super(Player,self).__init__(**kwargs)
-        with self.canvas:
-            Color(1,0,0,1)
-            Rectangle(pos=self.pos,size=self.size)
-
-    def on_touch_down(self,touch):
-        self.direction=('right' if touch.x>self.parent.center_x else 'left')
-
-    def on_touch_up(self,touch):
-        self.direction='none'
-
-    def on_key_down(self,keypress,scancode,*args):
-        if scancode==275:
-            self.direction='right'
-        elif scancode==276:
-            self.direction='left'
-        else:
-            self.direction='none'
-
-    def on_key_up(self,*args):
-        self.direction='none'
-
-    def update(self,dt):
-        dir_dict={'right':1, 'left':-1, 'none':0}
-        self.position+=(0.5*dt*dir_dict[self.direction])
+    # def __init__(self,**kwargs):
+    #     super(Player,self).__init__(**kwargs)
+    #     with self.canvas:
+    #         Color(1,0,0,1)
+    #         Rectangle(pos=self.pos,size=self.size)
+    #
+    # def on_touch_down(self,touch):
+    #     self.direction=('right' if touch.x>self.parent.center_x else 'left')
+    #
+    # def on_touch_up(self,touch):
+    #     self.direction='none'
+    #
+    # def on_key_down(self,keypress,scancode,*args):
+    #     if scancode==275:
+    #         self.direction='right'
+    #     elif scancode==276:
+    #         self.direction='left'
+    #     else:
+    #         self.direction='none'
+    #
+    # def on_key_up(self,*args):
+    #     self.direction='none'
+    #
+    # def update(self,dt):
+    #     dir_dict={'right':1, 'left':-1, 'none':0}
+    #     self.position+=(0.5*dt*dir_dict[self.direction])
 
 
 
 class Ball(Widget):
     #pos_hints are for proportional positioning
     pos_hint_x=NumericProperty(0.5)
-    pos_hint_y=NumericProperty(0.3)
+    pos_hint_y=NumericProperty(0.2)
     proper_size=NumericProperty(0.5)
     velocity=ListProperty([0.1,0.5])
 
@@ -93,6 +93,7 @@ class Block(Widget):
     colour=ListProperty([0,1,1])
 
     def _init__(self,**kwargs):
+        colour=ListProperty([])
         super(Block,self).__init__(**kwargs)
         self.colour=random.choice([(0.78,0.28,0),(0.28,0.63,0.28),(0.25,0.28,0.78)])
 
@@ -108,7 +109,7 @@ class Game(FloatLayout):
     def setup_blocks(self):
         for y_jump in range(5):
             for x_jump in range(10):
-                block=Block(pos_hint={'x':0.05+0.09*x_jump,'y':0.05+0.09*y_jump})
+                block=Block(pos_hint={'x':0.05+0.09*x_jump,'y':0.55+0.09*y_jump})
                 self.add_widget(block)
 
     # def update(self,dt):
@@ -124,7 +125,7 @@ class Game(FloatLayout):
     # def reset(self):
     #     for block in self.blocks:
     #         self.remove_widget(block)
-    #     self.blocks=[]
+        # self.blocks=[]
     #     self.setup_blocks=[]
     #     self.ball.velocity=[random.random(),0.5]
     #     self.player.position=0.5
@@ -134,7 +135,7 @@ class Game(FloatLayout):
 class BreakoutApp(App):
     def build(self):
         g=Game()
-        g.setup_blocks
+        g.setup_blocks()
         # if platform!='android':
         #     Window.bind(on_key_down=g.player.on_key_down)
         #     Window.bind(on_key_up=g.player.on_key_up)
