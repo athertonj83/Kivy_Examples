@@ -82,7 +82,6 @@ class Block(Widget):
     colour=ListProperty([0,1,1])
 
 
-
 class Game(FloatLayout):
     blocks=ListProperty([])
     player=ObjectProperty([])
@@ -124,20 +123,20 @@ class Game(FloatLayout):
 
     def destroy_blocks(self,ball):
         print("F")
-        for block in enumerate(self.blocks):
+        for i, block in enumerate(self.blocks):
             print("P")
-            print(block)
-            if ball.collide_widget(block):
+            print(i)
+            if self.collide_widget(block):
                 print("Collision")
-                #y_overlap=(ball.top - block.y if ball.velocity[1]>0 else block.top - ball.y)/block.size_hint_y
-                #x_overlap=(ball.right - block.x if ball.velocity[0]>0 else block.right - ball.x)/block.size_hint_x
-                #if x_overlap<y_overlap:
-                #    ball.velocity[0]*=-1
-                #else:
-                #    ball.velocity[1]*=-1
+                y_overlap=(ball.top - block.y if ball.velocity[1]>0 else block.top - ball.y)/block.size_hint_y
+                x_overlap=(ball.right - block.x if ball.velocity[0]>0 else block.right - ball.x)/block.size_hint_x
+                if x_overlap<y_overlap:
+                    ball.velocity[0]*=-1
+                else:
+                    ball.velocity[1]*=-1
 
                 self.remove_widget(block)
-                #self.blocks.pop(i)
+                self.blocks.pop(i)
                 if len(self.blocks)==0:
                     self.win()
                 return #remove 1 block per frame
