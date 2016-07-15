@@ -13,6 +13,8 @@ from kivy.core.window import Window
 from kivy.utils import platform
 #import pdb; pdb.set_trace()
 
+
+
 __version__='0.1' #Used later during Android compilation
 
 
@@ -126,7 +128,7 @@ class Game(FloatLayout):
         for i, block in enumerate(self.blocks):
             print("P")
             print(i)
-            if self.collide_widget(block):
+            if ball.collide_widget(block):
                 print("Collision")
                 y_overlap=(ball.top - block.y if ball.velocity[1]>0 else block.top - ball.y)/block.size_hint_y
                 x_overlap=(ball.right - block.x if ball.velocity[0]>0 else block.right - ball.x)/block.size_hint_x
