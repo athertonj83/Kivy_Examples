@@ -1,43 +1,42 @@
 # advanced timer for my interval training app
 import time
-import winsound
+#import winsound
 
 #60*int(warmUpMins)
 #60*intervalMins
 #Freq = 2500 # Set Frequency To 2500 Hertz
 #Dur = 1000 # Set Duration To 1000 ms == 1 second
+#winsound.Beep(2500,500) - this is for windows
+#print("\a")
 
 
-# warmup start of mins*60 for number of seconds
-def warmup(warmUpSecs):
-    t0 = time.clock()
-    time.sleep(int(warmUpSecs))
-    print("End of warm up!")
-    print(time.clock() - t0, "time elapsed")
-    winsound.Beep(2500,500)
+def timing(event,timeLength):
+    print(event,"- START")
+    time.sleep(int(timeLength))
+
 
 #intervals
-def intervalTime(numIntervals,intervalSecs):
+def runIntervals(numIntervals,fastI,slowI):
     for i in range(int(numIntervals)):
-        t0 = time.clock()
-        time.sleep(int(intervalSecs))
-        print("End of interval",i+1)
-        print(time.clock() - t0, "time elapsed")
-
-
+        timing("FAST Interval",fastI)
+        timing("SLOW Interval",slowI)
 
 
 #input from user
 def userInput():
-    x=input("Enter number of warm up seconds: ")
-    y=input("Enter number of intervals: ")
-    z=input("Enter length of each interval: ")
+    x=input("Warm up seconds: ")
+    y=input("Number of intervals: ")
+    z=input("Length of fast interval: ")
+    a=input("Length of slow interval: ")
+    b=input("Length of cool down: ")
 
-    print("You have chosen a warmup of",x,"seconds, and",y,"intervals, of",z, "seconds each.")
-    jen_continue=input("Y/N?")
+    print("\n\nWarmup:",x,"seconds\nNumber of intervals:",y,"\nFast Intervals:",z,"seconds\nSlow Intervals:",a,"seconds\nCool down:",b,"seconds")
+    jen_continue=input("Y?N?")
     if jen_continue.upper()=="Y":
-        warmup(x)
-        intervalTime(y,z)
+        timing("Warm up",x)
+        runIntervals(y,z,a)
+        timing("Cool down",b)
+        print("End")
 
 if __name__=="__main__":
     userInput()

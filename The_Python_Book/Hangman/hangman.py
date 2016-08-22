@@ -56,7 +56,7 @@ graphic=[
           |
           |
         ===============
-        """,        
+        """,
         """
           +---------+
           |         |
@@ -77,7 +77,7 @@ graphic=[
         """]
 
 def start():
-        print "Let's play a game of Linux Hangman!"
+        print("Let's play a game of Linux Hangman!")
         while game():
                 pass
         scores()
@@ -99,34 +99,34 @@ def game():
 
         while (letters_wrong!=tries) and ("".join(clue)!=word):
                 letter=guess_letter()
-                
+
                 if len(letter)==1 and letter.isalpha(): #if the letter guessed is 1 character and alphabetical
                         letter=letter.strip()
                         letter=letter.lower()
 
                         # if already picked, print message. Otherwise add to letters tried list and see if in the word
                         if letters_tried.find(letter)!=-1:
-                                print "You've already picked",letter
+                                print("You've already picked",letter)
                         else:
                                 letters_tried=letters_tried+letter
                                 first_index=word.find(letter)
-                                
+
                                 # How many underscores remaining?
                                 cnt=collections.Counter()
                                 for wrd in clue:
                                     cnt[wrd]+=1
-                                
+
                                 # if letter is wrong
                                 if first_index==-1:
                                      letters_wrong+=1
-                                     print "Sorry,",letter,"isn't what we're looking for."
-                                     print "Letter Guesses: ", letters_tried
-                                     print "Number of Guesses Remaining:", tries-letters_wrong
-                                     print " ".join(clue)
-                                     print (graphic[letters_wrong])
+                                     print("Sorry,",letter,"isn't what we're looking for.")
+                                     print("Letter Guesses: ", letters_tried)
+                                     print("Number of Guesses Remaining:", tries-letters_wrong)
+                                     print(" ".join(clue))
+                                     print((graphic[letters_wrong]))
 
 
-                                #if letter is right    
+                                #if letter is right
                                 elif first_index>=0:
                                     for i in range(word_length):
                                         if letter==word[i]:
@@ -137,155 +137,52 @@ def game():
 
                                     #if some letters left to get
                                     if cnt["_"]>1:
-                                        print "Congratulations,",letter,"is correct!"
-                                        print "Letter Guesses: ", letters_tried
-                                        print "Number of Guesses Remaining:", tries-letters_wrong
-                                        print " ".join(clue)                                    
+                                        print("Congratulations,",letter,"is correct!")
+                                        print("Letter Guesses: ", letters_tried)
+                                        print("Number of Guesses Remaining:", tries-letters_wrong)
+                                        print(" ".join(clue))
 
                                     # 1 letter remaining to guess
                                     if cnt["_"]==1:
-                                        print "Congratulations,",letter,"is correct!"
-                                        print "Letter Guesses: ", letters_tried
-                                        print "Number of Guesses Remaining:", tries-letters_wrong
-                                        print "Only 1 letter remains!"
-                                        print " ".join(clue)
+                                        print("Congratulations,",letter,"is correct!")
+                                        print("Letter Guesses: ", letters_tried)
+                                        print("Number of Guesses Remaining:", tries-letters_wrong)
+                                        print("Only 1 letter remains!")
+                                        print(" ".join(clue))
 
                                     # none left to get!
                                     if cnt["_"]==0:
-                                        print "Congratulations, You Win!"
-                                        print " ".join(clue)
+                                        print("Congratulations, You Win!")
+                                        print(" ".join(clue))
                                         player_score+=1
                                         break
-                                                       
+
                 else:
-                        print "Please choose a single letter!"
-                        
+                    print("Please choose a single letter!")
+
                 if letters_wrong==tries:
-                        print "Game Over"
-                        print "The word was", word
-                        computer_score+=1
-                        break
-             
+                    print("Game Over")
+                    print("The word was", word)
+                    computer_score+=1
+                    break
+
         return play_again()
 
 def guess_letter():
-        print # creating an empty line
-        letter=raw_input("Take a guess at a letter in our mystery word:")
-        print
+        print("")# creating an empty line
+        letter=input("Take a guess at a letter in our mystery word:")
         return letter
 
 def play_again():
-        answer=raw_input("Would you like to play again? y/n?")
+        answer=input("Would you like to play again? y/n?")
         if answer in ("y","Y","yes","YES","Yes"):
                 return answer
         else:
-                print "Thank you for playing. See you next time!"
+                print("Thank you for playing. See you next time!")
 
 def scores():
         global player_score,computer_score
-        print "HIGH SCORES"
-        print "Player: ",player_score
-        print "Computer: ",computer_score
+        print("HIGH SCORES\nPlayer:",player_score,"\nComputer:",computer_score)
 
 if __name__=='__main__':
         start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-                                                
-                                        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        

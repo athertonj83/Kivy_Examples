@@ -6,14 +6,14 @@ from kivy.properties import (ListProperty,NumericProperty)
 from kivy.uix.modalview import ModalView
 from kivy.uix.floatlayout import FloatLayout
 
-	
+
 class TicTacToeGrid(GridLayout):
 	def __init__(self,*args,**kwargs):
 		super(TicTacToeGrid,self).__init__(*args,**kwargs)
 		for row in range(3):
 			for column in range(3):
-				#grid_entry=GridEntry(coords=(row,column))
-				grid_entry=GridEntry(size_hint_x=None,width=100)
+				grid_entry=GridEntry(coords=(row,column))
+				#grid_entry=GridEntry(size_hint_x=None,width=100)
 				grid_entry.bind(on_press=self.button_pressed)
 				self.add_widget(grid_entry)
 	status=ListProperty([0,0,0,
@@ -25,12 +25,12 @@ class TicTacToeGrid(GridLayout):
 	def button_pressed(self,button):
 		player={1:'O', -1: 'X'}
 		colours={1: (1,0,0,1), -1: (0,1,0,1)} #rgba
-		
+
 		row,column=button.coords
 
 		status_index=3*row + column
 		already_played=self.status[status_index]
-		
+
 		# if nobody has aleady played here, make a new move
 		if not already_played:
 			self.status[status_index]=self.current_player
@@ -42,7 +42,7 @@ class TicTacToeGrid(GridLayout):
 
 	def reset(self,*args):
 		self.status=[0 for _ in range(9)]
-		
+
 		#self.children is a list containing all child widgets
 		for child in self.children:
 			child.text=''
@@ -59,7 +59,7 @@ class TicTacToeGrid(GridLayout):
 		sums=[sum(status[0:3]),sum(status[3:6]),sum(status[6:9]), #rows
 		      sum(status[0::3]),sum(status[1::3]),sum(status[2::3]), #cols
 		      sum(status[0::4]),sum(status[2:-2:2])] # diagonals
-		
+
 		winner=None
 
 		if 3 in sums:
@@ -73,7 +73,7 @@ class TicTacToeGrid(GridLayout):
 			winner='Draw! \n Would you like to play again?'
 
 		if winner:
-			
+
 
 			# create a button
 			float=FloatLayout(size_hint=(0.5,0.5))
@@ -86,12 +86,15 @@ class TicTacToeGrid(GridLayout):
 			victory_label=Label(text=winner,pos_hint={'x': 0.3, 'center_y':0.7},size_hint=(None,None))
 			float.add_widget(victory_label)
 
-			popup.add_widget(float)			
-			
+			popup.add_widget(float)
+
+			if y_button:
+				self.reset
+
 			popup.bind(on_dismiss=self.reset)
 			popup.open()
-		
-			
+
+
 class GridEntry(Button):
 	coords=ListProperty([0,0])
 
@@ -102,6 +105,3 @@ class TicTacToeApp(App):
 
 if __name__=='__main__':
 	TicTacToeApp().run()
-
-
-
